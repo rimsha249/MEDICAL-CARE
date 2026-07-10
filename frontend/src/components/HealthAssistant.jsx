@@ -1,6 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useContext } from "react";
+import { AppContext } from "../context/AppContext";
 
 const HealthAssistant = () => {
+  const { backendUrl } = useContext(AppContext);
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
@@ -32,7 +34,7 @@ const HealthAssistant = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch("http://localhost:4000/api/user/chat", {
+      const response = await fetch(`${backendUrl}/api/user/chat`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
